@@ -1,5 +1,4 @@
 const wordSearch = function(letters, word) {
-  let matrix = letters;
   let wordChoice = word;
 
   // Checks empty array, 1st priority
@@ -8,28 +7,27 @@ const wordSearch = function(letters, word) {
   }
 
   // Horizontal search, 2nd priority
-  const horizontalJoin = matrix.map((ls) => ls.join(""));
+  const horizontalJoin = letters.map((ls) => ls.join(""));
   for (const l of horizontalJoin) {
     if (l.includes(wordChoice)) return true;
   }
 
   // Vertical search, 3rd priority
-  matrix = transpose(letters);
-  const vertJoin = matrix.map((ls) => ls.join(""));
+  const vertMatrix = transpose(letters);
+  const vertJoin = vertMatrix.map((ls) => ls.join(""));
   for (const l of vertJoin) {
     if (l.includes(wordChoice)) return true;
   }
 
   // Horizontal backwards search, 4th priority
   wordChoice = word.split("").reverse().join("");
-  const horizontalJoinRev = matrix.map((ls) => ls.join(""));
+  const horizontalJoinRev = letters.map((ls) => ls.join(""));
   for (const l of horizontalJoinRev) {
     if (l.includes(wordChoice)) return true;
   }
 
   // Vertical backwards search, 5th priority
-  matrix = transpose(letters);
-  const vertJoinRev = matrix.map((ls) => ls.join(""));
+  const vertJoinRev = vertMatrix.map((ls) => ls.join(""));
   for (const l of vertJoinRev) {
     if (l.includes(wordChoice)) return true;
   }
@@ -51,5 +49,6 @@ const transpose = function(matrix) {
   }
   return newMatrix;
 };
+
 
 module.exports = { wordSearch };
