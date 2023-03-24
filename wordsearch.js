@@ -19,14 +19,26 @@ const wordSearch = function(letters, word) {
     if (l.includes(wordChoice)) return true;
   }
 
-  // Horizontal backwards search, 4th priority
+  // Diagonal search first half of array, 4th priority
+  const diagJoinLeft = transposeLeft(letters).map((ls) => ls.join(""));
+  for (const l of diagJoinLeft) {
+    if (l.includes(wordChoice)) return true;
+  }
+
+  // Diagonal search second half of array, 5th priority
+  const diagJoinRight = transposeRight(letters).map((ls) => ls.join(""));
+  for (const l of diagJoinRight) {
+    if (l.includes(wordChoice)) return true;
+  }
+    
+  // Horizontal backwards search, 6th priority
   wordChoice = word.split("").reverse().join("");
   const horizontalJoinRev = letters.map((ls) => ls.join(""));
   for (const l of horizontalJoinRev) {
     if (l.includes(wordChoice)) return true;
   }
 
-  // Vertical backwards search, 5th priority
+  // Vertical backwards search, 7th priority
   const vertJoinRev = vertMatrix.map((ls) => ls.join(""));
   for (const l of vertJoinRev) {
     if (l.includes(wordChoice)) return true;
@@ -50,5 +62,26 @@ const transpose = function(matrix) {
   return newMatrix;
 };
 
+const transposeRight = function(matrix) {
+  const newMatrix = [];
+  for (let i = 0; i < matrix[0].length; i++) {
+    newMatrix.push([]);
+    for (let j = 0; j < matrix.length; j++) {
+      newMatrix[i].push(matrix[j][j - i]);
+    }
+  }
+  return newMatrix;
+};
+
+const transposeLeft = function(matrix) {
+  const newMatrix = [];
+  for (let i = 0; i < matrix[0].length; i++) {
+    newMatrix.push([]);
+    for (let j = 0; j < matrix.length; j++) {
+      newMatrix[i].push(matrix[j][j + i]);
+    }
+  }
+  return newMatrix;
+};
 
 module.exports = { wordSearch };

@@ -50,6 +50,18 @@ const revArray2 =  [
   ["D", "Z", "K", "F", "Q", "U", "A", "L"],
 ];
 
+const diagArray =  [
+  ["S", "D", "C", "B", "Q", "U", "A", "L"],
+  ["D", "E", "E", "F", "O", "T", "E", "D"],
+  ["E", "E", "C", "F", "Q", "B", "L", "L"],
+  ["T", "F", "J", "T", "E", "E", "B", "G"],
+  ["T", "B", "C", "S", "F", "E", "R", "Y"],
+  ["B", "V", "X", "N", "N", "E", "Y", "B"],
+  ["E", "L", "I", "H", "A", "P", "A", "I"],
+  ["L", "E", "A", "X", "K", "U", "A", "S"],
+  ["S", "Z", "K", "M", "Q", "U", "A", "L"],
+];
+
 describe("#wordSearch()", function() {
   it("should return false if the word is not present", function() {
     const result = wordSearch(origArray, "FRANK");
@@ -89,6 +101,16 @@ describe("#wordSearch()", function() {
   it("should return false if word is NOT present in reverse vertically", function() {
     const results = wordSearch(revArray, "TOBY");
     assert.isFalse(results);
+  });
+
+  it("should return true if word is present diagonally below center row", function() {
+    const results = wordSearch(diagArray, "BLAM");
+    assert.isTrue(results);
+  });
+
+  it("should return true if word is present diagonally above center row", function() {
+    const results = wordSearch(diagArray, "BOBBY");
+    assert.isTrue(results);
   });
 
 });
