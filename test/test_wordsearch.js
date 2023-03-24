@@ -103,12 +103,12 @@ describe("#wordSearch()", function() {
     assert.isFalse(results);
   });
 
-  it("should return true if word is present diagonally below center row", function() {
+  it("should return true if word is present diagonally below center diagonal row", function() {
     const results = wordSearch(diagArray, "BLAM");
     assert.isTrue(results);
   });
 
-  it("should return true if word is present diagonally above center row", function() {
+  it("should return true if word is present diagonally above center digonal row", function() {
     const results = wordSearch(diagArray, "BOBBY");
     assert.isTrue(results);
   });
